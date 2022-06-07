@@ -76,6 +76,7 @@ type Request union {
     | "FindProvidersRequest" FindProvidersRequest
     | "GetIPNSRequest" GetIPNSRequest
     | "PutIPNSRequest" PutIPNSRequest
+    | "ProvideRequest" ProvideRequest
 }
 ```
 
@@ -87,6 +88,7 @@ type Response union {
     | "FindProvidersResponse" FindProvidersResponse
     | "GetIPNSResponse" GetIPNSResponse
     | "PutIPNSResponse" PutIPNSResponse
+    | "ProvideResponse" ProvideResponse
     | "Error" Error
 }
 ```
@@ -150,9 +152,9 @@ Note: While the Key is a CID it is highly recommended that server implementation
     }
 
     type Provider struct {
-     Node Node
-     Proto optional [TransferProtocol]
-     }
+        Node Node
+        Proto optional [TransferProtocol]
+    }
 
     # Note: This is not quite valid IPLD Schema because having fallbacks within unions is not yet implemented and codified https://github.com/ipld/ipld/issues/194. We will use this syntax within this spec though.
 
@@ -278,6 +280,40 @@ Request:
 Response:
 ```
 {"PutIPNSResponse : {}"}
+```
+
+#### Provide
+
+A message for indicating that the client is able to act as a provider for a given key.
+
+```ipldsch
+    type ProvideRequest struct 
+        Key &Any
+        Providers [Provider]
+    }
+
+    type ProvideResponse struct {}
+```
+
+Note: While the Key is a CID it is highly recommended that server implementations treat these Requests as if they were for the multihash.
+
+##### DAG-JSON Examples
+
+Request:
+```
+{"ProvideRequest" : {
+    "Key" : {"/":{"bytes":"AXIUBPnagss"}},
+    "Providers" : [
+        {"Node":{"Peer":{"ID":{
+            "/":{"bytes":"EncodedPeerID"}}
+        }}}
+    ]
+}}
+```
+
+Response:
+```
+{"ProvideResponse : {}"}
 ```
 
 # Method Upgrade Paths
