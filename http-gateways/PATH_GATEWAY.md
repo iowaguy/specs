@@ -174,6 +174,7 @@ For example:
 
 - [application/vnd.ipld.raw](https://www.iana.org/assignments/media-types/application/vnd.ipld.raw) – disables [IPLD codec deserialization](https://ipld.io/docs/codecs/), requests a verifiable raw [block](https://docs.ipfs.io/concepts/glossary/#block) to be returned
 - [application/vnd.ipld.car](https://www.iana.org/assignments/media-types/application/vnd.ipld.car) – disables [IPLD codec deserialization](https://ipld.io/docs/codecs/), requests a verifiable [CAR](https://docs.ipfs.io/concepts/glossary/#car) stream to be returned
+- [application/x-tar](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types) – disables [IPLD codec deserialization](https://ipld.io/docs/codecs/), requests a [TAR](https://en.wikipedia.org/wiki/Tar_(computing)) archive to be returned
 <!-- TODO: https://github.com/ipfs/go-ipfs/issues/8823
 - application/vnd.ipld.dag-json OR application/json – requests IPLD Data Model representation serialized into [DAG-JSON format](https://ipld.io/docs/codecs/known/dag-json/)
 - application/vnd.ipld.dag-cbor OR application/cbor - requests IPLD Data Model representation serialized into [DAG-CBOR format](https://ipld.io/docs/codecs/known/dag-cbor/)
@@ -241,7 +242,9 @@ Optional, `format=<format>` can be used to request specific response format.
 
 This is a URL-friendly alternative to sending
 `Accept: application/vnd.ipld.<format>` header, see [`Accept`](#accept-request-header)
-for more details.
+for more details. 
+
+In case of `Accept: application/x-tar`, the `?format=` equivalent is `tar`.
 
 <!-- TODO Planned: https://github.com/ipfs/go-ipfs/issues/8769
 - `selector=<cid>`  can be used for passing a CID with [IPLD selector](https://ipld.io/specs/selectors)
