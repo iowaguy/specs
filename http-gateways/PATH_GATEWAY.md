@@ -393,8 +393,8 @@ Returned directive depends on requested content path and format:
     value, but it should not be lower than 60 seconds.
 
 - `Cache-Control: no-cache, no-transform`  should be returned with
-  `application/vnd.ipld.car` responses if the block order in CAR stream is not
-  guaranteed to be deterministic.
+  `application/vnd.ipld.car` and `application/x-tar` responses if
+  the block order in CAR stream, or the TAR response, is not guaranteed to be deterministic.
 
 ### `Last-Modified` (response header)
 
