@@ -362,7 +362,7 @@ and CDNs, implementations should base it on both CID and response type:
 
 - When a gateway can’t guarantee byte-for-byte identical responses, a “weak”
   etag should be used. For example, if CAR or TAR is streamed, and blocks arrive in
-  non-deterministic order, the response should have `Etag: W/"bafy…foo.EXT"`, where `EXT`
+  non-deterministic order, the response should have `Etag: W/"bafy…foo.bar"`, where `bar`
   is `car` or `tar`, respectively.
 
 - When responding to [`Range`](#range-request-header) request, a strong `Etag`
