@@ -350,7 +350,7 @@ and CDNs, implementations should base it on both CID and response type:
 
 - By default, etag should be based on requested CID. Example: `Etag: "bafy…foo"`
 
-- If a custom `format` was requested (such as a raw block or a CAR), the
+- If a custom `format` was requested (such as a raw block, CAR or TAR), the
   returned etag should be modified to include it. It could be a suffix.
   - Example: `Etag: "bafy…foo.raw"`
 
@@ -361,8 +361,9 @@ and CDNs, implementations should base it on both CID and response type:
   - Example: `Etag: "DirIndex-2B423AF_CID-bafy…foo"`
 
 - When a gateway can’t guarantee byte-for-byte identical responses, a “weak”
-  etag should be used. For example, if CAR is streamed, and blocks arrive in
-  non-deterministic order, the response should have `Etag: W/"bafy…foo.car"`
+  etag should be used. For example, if CAR or TAR is streamed, and blocks arrive in
+  non-deterministic order, the response should have `Etag: W/"bafy…foo.EXT"`, where `EXT`
+  is `car` or `tar`, respectively.
 
 - When responding to [`Range`](#range-request-header) request, a strong `Etag`
   should be based on requested range in addition to CID and response format:
